@@ -1,6 +1,6 @@
 # Dockerized Full-Stack Application
 
-This repository contains the `docker-compose.yml` file for running a full-stack application with a PostgreSQL database, a backend, and a frontend using Docker Compose.
+This repository contains the `docker-compose.yml` file for running a full-stack application with a PostgreSQL database, a backend, and a frontend using Docker Compose. Will 
 
 ## Services
 
@@ -33,7 +33,9 @@ The `docker-compose.yml` sets up the following services:
 
 ## Setup Instructions
 
+Assuming this is set up on an ubuntu virtual machine
+
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/your-repo.git
-   cd your-repo
+2. Start the application:
+   ```docker-compose up```
+4. Connect to the VMs public ip address with port 3000

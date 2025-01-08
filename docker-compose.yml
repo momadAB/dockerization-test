@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: killer99
+      POSTGRES_DB: demosecurityjwt
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # networks:
+    #   - app-network
+
+  backend:
+    image: momad38/backend:latest
+    # build:
+    #   context: ./Backend
+    container_name: backend
+    depends_on:
+      - database
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/demosecurityjwt
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: killer99
+    # networks:
+    #   - app-network
+
+  frontend:
+    image: momad38/frontend:latest
+    # build:
+    #   context: ./deliverable-frontend
+    container_name: frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://backend:8080
+    # networks:
+    #   - app-network
+
+volumes:
+  postgres_data:
+# networks:
+#   app-network:
+#     driver: bridge
